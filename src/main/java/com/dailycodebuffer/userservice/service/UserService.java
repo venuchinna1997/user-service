@@ -1,7 +1,7 @@
 package com.dailycodebuffer.userservice.service;
 
 import com.dailycodebuffer.userservice.VO.Department;
-import com.dailycodebuffer.userservice.VO.ResponseTemplate;
+import com.dailycodebuffer.userservice.VO.ResponseTemplateVO;
 import com.dailycodebuffer.userservice.entity.UserInfo;
 import com.dailycodebuffer.userservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,13 +24,13 @@ public class UserService {
         return userRepository.save(userInfo);
     }
 
-    public ResponseTemplate getUserWithDepartment(Long userId) {
+    public ResponseTemplateVO getUserWithDepartment(Long userId) {
         log.info("In getUserWithDepartment method of UserService");
-        ResponseTemplate responseTemplate = new ResponseTemplate();
+        ResponseTemplateVO vo = new ResponseTemplateVO();
         UserInfo userInfo = userRepository.findByUserId(userId);
-        responseTemplate.setUserInfo(userInfo);
-        Department department = restTemplate.getForObject("http://localhost:9090/departments/"+userInfo.getDepartmentId(), Department.class);
-        responseTemplate.setDepartment(department);
-        return responseTemplate;
+        vo.setUserInfo(userInfo);
+        Department department = restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/"+userInfo.getDepartmentId(), Department.class);
+        vo.setDepartment(department);
+        return vo;
     }
 }

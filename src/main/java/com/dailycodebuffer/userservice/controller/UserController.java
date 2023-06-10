@@ -1,6 +1,6 @@
 package com.dailycodebuffer.userservice.controller;
 
-import com.dailycodebuffer.userservice.VO.ResponseTemplate;
+import com.dailycodebuffer.userservice.VO.ResponseTemplateVO;
 import com.dailycodebuffer.userservice.entity.UserInfo;
 import com.dailycodebuffer.userservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseTemplate getUserWithDepartment(@PathVariable("id") Long userId){
+    public ResponseTemplateVO getUserWithDepartment(@PathVariable("id") Long userId){
         log.info("In getUserWithDepartment method of UserController");
         return userService.getUserWithDepartment(userId);
     }
